@@ -1,0 +1,21 @@
+name: Java CI  # Dai un nome al workflow
+
+on:    #Quando far partire il workflow
+  push:
+    branches: [ main ]  #ogni volta che fai un push sul branch main
+  pull_request:
+    branches: [ main ] #ogni volta che qualcuno fa una pull request verso main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # Definisce un “job” chiamato build, che verrà eseguito su un server GitHub con Ubuntu
+
+    steps:
+      - uses: actions/checkout@v3  #Primo step: clona il codice dal tuo repository
+      - name: Set up JDK 24       # imposta Java 17, che è quello usato nel progetto Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Maven
+        run: mvn clean install #esegue il comando mvn clean install, ovvero: compila il progetto  esegue i test (se presenti) genera il pacchetto
