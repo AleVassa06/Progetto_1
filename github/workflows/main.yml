@@ -16,3 +16,5 @@ jobs: #definisco un job chiamato build che verrà eseguito su serger github con 
     with:
       java-version: '17'
       distribution: 'temurin'
+      cache: maven
+    run: mvn -B Package --file pom.xml
